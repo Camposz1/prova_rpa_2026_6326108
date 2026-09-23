@@ -1,0 +1,97 @@
+name: CI - Prova RPA 2026
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - "entregas/**"
+      - ".flake8"
+      - "requirements.txt"
+      - ".github/workflows/ci_prova.yml"
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches: [ "master" ]
+    paths:
+      - "entregas/**"
+      - ".flake8"
+      - "requirements.txt"
+      - ".github/workflows/ci_prova.yml"
+
+jobs:
+  validar_prova:
+    name: Lint e Execução – Prova
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.10", "3.11" ]
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # OBS: entregas/EXEMPLO contem codigo com ERROS PROPOSITAIS (material de
+      # estudo). O flake8 ignora a pasta via .flake8 e os passos de execucao
+      # abaixo filtram esse caminho com -not -path '*/EXEMPLO/*'.
+      - name: Verificar estilo (PEP8 / flake8)
+        run: |
+          if [ -d entregas ]; then
+            flake8 entregas/
+          else
+            echo "Pasta entregas/ ainda não existe — nada a analisar."
+          fi
+
+      - name: Q1 – bot_config.py
+        run: |
+          found=$(find entregas -type f -name 'bot_config.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          if [ -n "$found" ]; then
+            echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
+          else
+            echo "Nenhum bot_config.py encontrado — pulando."
+          fi
+
+      - name: Q2 – processador_pedidos.py
+        run: |
+          found=$(find entregas -type f -name 'processador_pedidos.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          if [ -n "$found" ]; then
+            echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
+          else
+            echo "Nenhum processador_pedidos.py encontrado — pulando."
+          fi
+
+      - name: Q3 – main.py
+        run: |
+          found=$(find entregas -type f -name 'main.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          if [ -n "$found" ]; then
+            echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
+          else
+            echo "Nenhum main.py encontrado — pulando."
+          fi
+
+      - name: Q4 – leitor_resiliente.py
+        run: |
+          found=$(find entregas -type f -name 'leitor_resiliente.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          if [ -n "$found" ]; then
+            echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
+          else
+            echo "Nenhum leitor_resiliente.py encontrado — pulando."
+          fi

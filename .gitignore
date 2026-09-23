@@ -1,0 +1,31 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Cache do Python
+__pycache__/
+/**/__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Cache de testes / cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos gerados em runtime pela prova
+# (ex.: log da Questão 4 — Aula 04)
+*.log
+execucao.log
+
+# Ferramentas / editores
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Respostas do professor (não devem ser enviadas)
+/**/*_resp.md
