@@ -1,4 +1,0 @@
-pedido;cliente;valor
-1001;ACME LTDA;230.00
-1002;Globex;8000.00
-1003;Initech;15200.00

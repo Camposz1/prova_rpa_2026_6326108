@@ -11,11 +11,11 @@ max-complexity = 10
 extend-ignore = W291, W293, W391
 
 # Pastas que nao precisam ser analisadas.
-# OBS: entregas/EXEMPLO contem codigo com ERROS PROPOSITAIS (material de
-# estudo). Nao deve ser analisado nem reprovar o CI.
+# OBS: entregas/_MODELO contem os contratos-molde (com NotImplementedError).
+# Nao deve ser analisado nem reprovar o CI.
 exclude =
     .git,
     __pycache__,
     .venv,
     .pytest_cache,
-    entregas/EXEMPLO
+    entregas/_MODELO

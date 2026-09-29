@@ -49,9 +49,9 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      # OBS: entregas/EXEMPLO contem codigo com ERROS PROPOSITAIS (material de
-      # estudo). O flake8 ignora a pasta via .flake8 e os passos de execucao
-      # abaixo filtram esse caminho com -not -path '*/EXEMPLO/*'.
+      # OBS: entregas/_MODELO contem os contratos-molde (com NotImplementedError).
+      # O flake8 ignora a pasta via .flake8 e os passos de execucao abaixo
+      # filtram esse caminho com -not -path '*/_MODELO/*'.
       - name: Verificar estilo (PEP8 / flake8)
         run: |
           if [ -d entregas ]; then
@@ -62,7 +62,7 @@ jobs:
 
       - name: Q1 – bot_config.py
         run: |
-          found=$(find entregas -type f -name 'bot_config.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'bot_config.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
             echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
           else
@@ -71,7 +71,7 @@ jobs:
 
       - name: Q2 – processador_pedidos.py
         run: |
-          found=$(find entregas -type f -name 'processador_pedidos.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'processador_pedidos.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
             echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
           else
@@ -80,7 +80,7 @@ jobs:
 
       - name: Q3 – main.py
         run: |
-          found=$(find entregas -type f -name 'main.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'main.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
             echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
           else
@@ -89,7 +89,7 @@ jobs:
 
       - name: Q4 – leitor_resiliente.py
         run: |
-          found=$(find entregas -type f -name 'leitor_resiliente.py' -not -path '*/EXEMPLO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'leitor_resiliente.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
             echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
           else
