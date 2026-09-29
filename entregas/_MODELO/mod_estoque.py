@@ -10,25 +10,25 @@
 # =============================================================================
 
 
-def cadastrar_colaborador(nome: str, cargo: str, salario: float) -> dict:
-    """Retorna um dict com as chaves "nome", "cargo" e "salario".
+def cadastrar_item(nome: str, quantidade: int, preco_unitario: float) -> dict:
+    """Retorna um dict com as chaves "nome", "quantidade" e "preco_unitario".
 
     TODO(aluno): implemente. Remova o raise quando terminar.
     """
-    raise NotImplementedError("Implemente cadastrar_colaborador.")
+    raise NotImplementedError("Implemente cadastrar_item.")
 
 
-def calcular_folha(lista_colaboradores: list) -> float:
-    """Recebe uma lista de dicts e retorna a soma dos salarios.
-
-    TODO(aluno): implemente. Remova o raise quando terminar.
-    """
-    raise NotImplementedError("Implemente calcular_folha.")
-
-
-def exibir_colaboradores(lista_colaboradores: list) -> None:
-    """Percorre a lista e imprime cada colaborador formatado.
+def calcular_valor_estoque(itens: list) -> float:
+    """Retorna a soma de (quantidade * preco_unitario) de todos os itens.
 
     TODO(aluno): implemente. Remova o raise quando terminar.
     """
-    raise NotImplementedError("Implemente exibir_colaboradores.")
+    raise NotImplementedError("Implemente calcular_valor_estoque.")
+
+
+def listar_itens_em_falta(itens: list, minimo: int) -> list:
+    """Retorna uma nova lista so com os itens cuja quantidade < minimo.
+
+    TODO(aluno): implemente. Remova o raise quando terminar.
+    """
+    raise NotImplementedError("Implemente listar_itens_em_falta.")

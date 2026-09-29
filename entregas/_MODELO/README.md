@@ -20,8 +20,8 @@ vermelho que a IDE já apontou. O molde te dá a estrutura esperada; o raciocín
 e o código são seus.
 
 ## Arquivos
-- `bot_config.py` — Questão 1
-- `processador_pedidos.py` — Questão 2
-- `mod_rh.py` + `main.py` — Questão 3
-- `leitor_resiliente.py` — Questão 4
+- `config_conexao.py` — Questão 1
+- `monitor_sensores.py` — Questão 2
+- `mod_estoque.py` + `main.py` — Questão 3
+- `importador_notas.py` + `notas.csv` — Questão 4
 - `AVALIACAO_PROCESSO.md` — Questão 5 (ficha PDD)

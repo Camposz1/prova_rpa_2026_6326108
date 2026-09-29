@@ -8,11 +8,13 @@
 # =============================================================================
 
 # Objetivo:
-#   - Importar as funcoes de mod_rh.
-#   - Cadastrar pelo menos 3 colaboradores usando cadastrar_colaborador.
-#   - Exibir a lista formatada e o total da folha de pagamento.
+#   - Importar as funcoes de mod_estoque.
+#   - Cadastrar pelo menos 3 itens usando cadastrar_item.
+#   - Exibir o valor total do estoque (calcular_valor_estoque).
+#   - Exibir a lista de itens em falta (listar_itens_em_falta), escolhendo
+#     um valor de `minimo`.
 
-# TODO(aluno): faca o import correto de mod_rh aqui.
+# TODO(aluno): faca o import correto de mod_estoque aqui.
 
 
 def main():

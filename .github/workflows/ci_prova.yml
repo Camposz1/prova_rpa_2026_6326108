@@ -60,38 +60,46 @@ jobs:
             echo "Pasta entregas/ ainda não existe — nada a analisar."
           fi
 
-      - name: Q1 – bot_config.py
+      - name: Q1 – config_conexao.py
         run: |
-          found=$(find entregas -type f -name 'bot_config.py' -not -path '*/_MODELO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'config_conexao.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
             echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
           else
-            echo "Nenhum bot_config.py encontrado — pulando."
+            echo "Nenhum config_conexao.py encontrado — pulando."
           fi
 
-      - name: Q2 – processador_pedidos.py
+      - name: Q2 – monitor_sensores.py
         run: |
-          found=$(find entregas -type f -name 'processador_pedidos.py' -not -path '*/_MODELO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'monitor_sensores.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
             echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
           else
-            echo "Nenhum processador_pedidos.py encontrado — pulando."
+            echo "Nenhum monitor_sensores.py encontrado — pulando."
           fi
 
       - name: Q3 – main.py
         run: |
           found=$(find entregas -type f -name 'main.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
-            echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
+            echo "$found" | while read -r f; do
+              echo ">> $f";
+              # Roda a partir da pasta do arquivo para o import de mod_estoque funcionar.
+              ( cd "$(dirname "$f")" && python "$(basename "$f")" );
+            done
           else
             echo "Nenhum main.py encontrado — pulando."
           fi
 
-      - name: Q4 – leitor_resiliente.py
+      - name: Q4 – importador_notas.py
         run: |
-          found=$(find entregas -type f -name 'leitor_resiliente.py' -not -path '*/_MODELO/*' 2>/dev/null)
+          found=$(find entregas -type f -name 'importador_notas.py' -not -path '*/_MODELO/*' 2>/dev/null)
           if [ -n "$found" ]; then
-            echo "$found" | while read -r f; do echo ">> $f"; python "$f"; done
+            echo "$found" | while read -r f; do
+              echo ">> $f";
+              # Roda a partir da pasta do arquivo para achar o CSV (ex.: notas.csv).
+              ( cd "$(dirname "$f")" && python "$(basename "$f")" );
+            done
           else
-            echo "Nenhum leitor_resiliente.py encontrado — pulando."
+            echo "Nenhum importador_notas.py encontrado — pulando."
           fi
