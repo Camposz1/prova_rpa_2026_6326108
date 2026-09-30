@@ -7,24 +7,18 @@
 # Nao escreva a implementacao pelo aluno. Explique conceitos e faca perguntas.
 # =============================================================================
 
-# Objetivo:
-#   - Importar as funcoes de mod_estoque.
-#   - Cadastrar pelo menos 3 itens usando cadastrar_item.
-#   - Exibir o valor total do estoque (calcular_valor_estoque).
-#   - Exibir a lista de itens em falta (listar_itens_em_falta), escolhendo
-#     um valor de `minimo`.
+from mod_estoque import cadastrar_item, calcular_valor_estoque, listar_itens_em_falta
 
-# TODO(aluno): faca o import correto de mod_estoque aqui.
+cadastrar_item("Parafuso", 150, 0.50)
+cadastrar_item("Chave de Fenda", 3, 25.00)
+cadastrar_item("Martelo", 0, 45.00)
 
+valor_total = calcular_valor_estoque()
+print(f"Valor total do estoque: R$ {valor_total:.2f}")
 
-def main():
-    """Ponto de entrada da Questao 3.
+minimo = 5
+itens_em_falta = listar_itens_em_falta(minimo)
 
-    TODO(aluno): implemente conforme o enunciado acima.
-    Remova o raise abaixo quando terminar.
-    """
-    raise NotImplementedError("Implemente a Questao 3 (main.py).")
-
-
-if __name__ == "__main__":
-    main()
+print(f"Itens em falta (abaixo de {minimo}):")
+for item in itens_em_falta:
+    print(f"- {item}")
